@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Funcionários</title>
+	<h:outputStylesheet library="css" name="file.css" />
+</h:head>
+<h:body id="body">
+	<h:form>
+	<table  style="border: 2px solid; width: 100%" >
+		<tr>
+			<td colspan="2" align="center">
+				<ui:insert name="cabecalho">
+					<h1>Funcionários</h1>
+				</ui:insert>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%">
+				<ui:insert name="menu">
+			      Início
+			    </ui:insert></td>
+			<td>
+				<ui:insert name="conteudo">
+			      Aula de Java 3 Web
+			    </ui:insert>
+		    </td>
+		</tr>
+	</table>
+	</h:form>
+</h:body>
+</html>

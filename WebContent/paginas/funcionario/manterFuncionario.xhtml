@@ -1,0 +1,175 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<ui:composition template="funcionario/templatePrincipal.xhtml">
+	<ui:define name="menu">
+		<p:panelMenu>
+			<p:submenu label="Funcionários">
+				<p:menuitem value="Pesquisar"
+					action="funcionario/pesquisarFuncionario.xhtml" icon="pi pi-save" />
+				<p:menuitem value="Manter"
+					action="funcionario/manterFuncionario.xhtml" icon="pi pi-save" />
+			</p:submenu>
+		</p:panelMenu>
+	</ui:define>
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<f:viewAction action="#{FuncionarioBean.atualizarUsuarioLogado}" />
+		</f:metadata>
+		
+		<h:outputText value="Usuario: #{FuncionarioBean.usuarioLogado.nome}" />
+
+		<p:panelGrid header="Dados Pessoais"
+			style="margin-top:20px; width:100%">
+
+			<p:row>
+				<p:column>
+					<h:outputText value="Nome" />
+				</p:column>
+				<p:column colspan="2">
+					<p:inputText value="#{FuncionarioBean.funcionario.nome}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="Matrícula" />
+				</p:column>
+				<p:column colspan="2">
+					<p:inputText value="#{FuncionarioBean.funcionario.matricula}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="Cargo" />
+				</p:column>
+				<p:column colspan="2">
+					<p:inputText value="#{FuncionarioBean.funcionario.cargo}" />
+				</p:column>
+			</p:row>
+
+			<p:panelGrid header="Endereço Fixo"
+				style="margin-top:20px; width:100%">
+				<p:row>
+					<p:column>
+						<h:outputText value="Rua" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{FuncionarioBean.funcionario.rua}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="Numero" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{FuncionarioBean.funcionario.numero}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="Bairro" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{FuncionarioBean.funcionario.bairro}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="Cidade" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{FuncionarioBean.funcionario.cidade}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="Complemento" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{FuncionarioBean.funcionario.complemento}" />
+					</p:column>
+				</p:row>
+
+
+			</p:panelGrid Header="Telefones" style="margin-top:20px; width:100%">
+
+			<p:row>
+				<p:column>
+					<h:outputText value="DDD" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{FuncionarioBean.telefoneAdicionar.ddd}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="Numero" />
+				</p:column>
+				<p:column>
+					<p:inputNumber value="#{FuncionarioBean.telefoneAdicionar.numero}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="Tipo" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu style="width:125px"
+						value="#{FuncionarioBean.telefoneAdicionar.tipo}">
+						<f:selectItem itemLabel="" />
+						<f:selectItem itemLabel="Celular" itemValue="Celular" />
+						<f:selectItem itemLabel="Residencial" itemValue="Residencial" />
+					</p:selectOneMenu>
+				</p:column>
+
+			</p:row>
+
+			<p:row>
+				<p:column colspan="6">
+					<p:commandButton value="Adicionar" update="@form" center="left"
+						style="margin-right:2px;"
+						actionListener="#{FuncionarioBean.adicionarTelefone}" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:panel style="margin-bottom:10px;">
+			<p:row>
+				<p:column colspan='6'>
+					<p:commandButton value="Salvar" update="@form"
+						style="margin-right:2px;"
+						actionListener="#{FuncionarioBean.salvarFuncionario}" />
+					<p:commandButton value="Remover" update="@form"
+						style="margin-right:2px;" />
+					<p:commandButton value="Pesquisar" update="@form"
+						style="margin-right:2px;" />
+					<p:commandButton value="Exibir Usuario" update="@form"
+						style="margin-right:2px;"
+						actionListener="#{FuncionarioBean.exibirUsuario}" />
+				</p:column>
+			</p:row>
+		</p:panel>
+		<p:panel header="Telefones cadastrados" style="margin-bottom:10px">
+
+			<p:dataTable var="telefoneFuncionario"
+				value="#{FuncionarioBean.funcionario.telefone}">
+				<p:column headerText="DDD">
+					<h:outputText value="#{telefoneFuncionario.ddd}" />
+				</p:column>
+
+				<p:column headerText="Numero">
+					<h:outputText value="#{telefoneFuncionario.numero}" />
+				</p:column>
+
+				<p:column headerText="Tipo">
+					<h:outputText value="#{telefoneFuncionario.tipo}" />
+				</p:column>
+
+				<p:column headerText="Ação">
+					<h:commandButton value="Remover"
+						action="#{FuncionarioBean.removerTelefone}">
+						<f:setPropertyActionListener
+							target="#{FuncionarioBean.nomeItemSelecionado}"
+							value="#{itemfeira.nome}" />
+					</h:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
+</html>

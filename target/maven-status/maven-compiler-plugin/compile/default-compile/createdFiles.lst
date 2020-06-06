@@ -1,0 +1,6 @@
+jpaUtil\jpaUtil.class
+entidade\Telefone.class
+dao\UsuarioDAO.class
+dao\UsuarioDAOImpl.class
+entidade\Usuario.class
+entidade\Funcionario.class
